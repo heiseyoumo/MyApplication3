@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/createFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="创建File"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:text="状态值"
+        android:textColor="#ff0000" />
+
+    <TextView
+        android:id="@+id/sendNotification_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ff0000"
+        android:padding="20dp"
+        android:text="发送通知"
+        android:textSize="23sp" />
+</RelativeLayout>
