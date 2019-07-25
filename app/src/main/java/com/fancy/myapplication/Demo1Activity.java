@@ -1,6 +1,10 @@
 package com.fancy.myapplication;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
@@ -26,6 +30,32 @@ public class Demo1Activity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo1);
+        Handler handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                return false;
+            }
+        }) {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            }
+        };
+        HandlerThread handlerThread = new HandlerThread("haha");
+        handlerThread.start();
+
+
+        Handler handler1 = new Handler(handlerThread.getLooper());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                Handler handler1 = new Handler();
+                Handler handler2 = new Handler();
+                Looper.loop();
+            }
+        }).start();
+
         Observable<String> map = Observable.create(new ObservableOnSubscribe<Integer>() {
 
             @Override
