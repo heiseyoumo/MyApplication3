@@ -18,6 +18,7 @@ public class Demo9Activity extends BaseActivity {
     private TextView tv;
     @InjectView(R.id.button)
     private TextView btn;
+    String str="bacd";
 
     @Override
     public void initData() {
