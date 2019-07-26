@@ -82,6 +82,9 @@ public class InjectManager {
         Class<? extends Activity> aClass = activity.getClass();
         Field[] declaredFields = aClass.getDeclaredFields();
         for (Field field : declaredFields) {
+            if (!field.isAnnotationPresent(InjectView.class)) {
+                return;
+            }
             InjectView annotation = field.getAnnotation(InjectView.class);
             if (annotation != null) {
                 int value = annotation.value();
@@ -103,22 +106,23 @@ public class InjectManager {
 
     private static void injectLayoutId(Activity activity) {
         Class<? extends Activity> aClass = activity.getClass();
+        if (!aClass.isAnnotationPresent(setContentView.class)) {
+            return;
+        }
         setContentView annotation = aClass.getAnnotation(setContentView.class);
-        if (annotation != null) {
-            /**
-             * 第一种low逼写法
-             * activity.setContentView(annotation.value());
-             */
-            try {
-                Method method = aClass.getMethod("setContentView", int.class);
-                method.invoke(activity, annotation.value());
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
+        /**
+         * 第一种low逼写法
+         * activity.setContentView(annotation.value());
+         */
+        try {
+            Method method = aClass.getMethod("setContentView", int.class);
+            method.invoke(activity, annotation.value());
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
     }
 }
